@@ -57,7 +57,7 @@ a{
 export const Title  = styled.h2`
   font-family: "Road Rage", sans-serif;
   font-size: 40px;
-  color: #fff;
+  color: #9758A6;
 
   span {
     color:#9758A6;
@@ -108,4 +108,3 @@ export const Link = styled(ReactLink)`
 text-decoration:none;
 color: #fff;
 `
-
