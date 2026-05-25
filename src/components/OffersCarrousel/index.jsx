@@ -7,24 +7,28 @@ const Carousel = MultiCarouselModule.default?.default || MultiCarouselModule.def
 || MultiCarouselModule.Carousel;
 
 import {api} from '../../services/api';
-import { Container, Title, ContainerItems } from './styles';
+import { Container, Title,  } from './styles';
+import { CardProduct } from '../CardProduct';
 
 
-export function CategoryCarrousel() {
-    const [categories, setCategories] = useState([]);
+export function OffersCarrousel() {
+    const [offers, setOffers] = useState([]);
 
     useEffect(() => {
-        async function loadCategories() {
-            const { data } = await api.get('/categories');
+        async function loadProducts() {
+            const { data } = await api.get('/products');
 
-            setCategories(data);
-            console.log(data);
+            const onlyOffers = data.filter(product => product.offer === true);
+
+            setOffers(onlyOffers);
+
+          
         }
 
-        loadCategories();
+        loadProducts();
     }, []);
 
-    console.log(CategoryCarrousel);
+    // console.log(CategoryCarrousel);
 
     const responsive = {
         superLargeDesktop: {
@@ -54,21 +58,16 @@ export function CategoryCarrousel() {
     
 
     <Container>
-      <Title>Categorias</Title>
+      <Title>Ofertas do Dia</Title>
 
-      {categories && categories.length > 0 ? (
+      {offers && offers.length > 0 ? (
         <Carousel 
         responsive={responsive} 
         infinite={true}
         itemClass="carousel-item">
 
-          {categories.map(category => (
-            <ContainerItems 
-            key={category.id}
-            $imageUrl = {category.url }
-            >
-              <p>{category.name}</p>
-            </ContainerItems>
+          {offers.map(product => (
+           <CardProduct key={product.id} product={product} />
           ))}
         </Carousel>
       )
