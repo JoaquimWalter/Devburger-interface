@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { CardImage, Container } from './styles';
 import { CardButton } from '../CardButton';
+import { formatPrice } from '../../utils/formartPrice';
 
 export function CardProduct({ product }) {
     return (
@@ -8,7 +9,7 @@ export function CardProduct({ product }) {
             <CardImage src={product.url} alt={product.name} />
             <div>
                 <p>{product.name}</p>
-                <strong>R$ {product.price.toFixed(2)}</strong>
+                <strong>{formatPrice(product.price)}</strong>
             </div>
             <CardButton></CardButton>
         </Container>
